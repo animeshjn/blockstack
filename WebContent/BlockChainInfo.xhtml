@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>The BlockStack Project</title>
+	<link href="css/singlePageTemplate.css" rel="stylesheet"
+		type="text/css" />
+	<link rel="shortcut icon" href="/images/icon.ico" />
+	<script>
+		function getCookie(name) {
+			var value = "; " + document.cookie;
+			var parts = value.split("; " + name + "=");
+			if (parts.length == 2)
+				return parts.pop().split(";").shift();
+		}
+		function delete_cookie(name) {
+			document.cookie = name
+					+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		}
+		function check() {
+			var x = getCookie("user");
+			if (x != null)
+				if (getCookie("type") == "instructor")
+					return x;
+				else {
+					delete_cookie(x);
+					delete_cookie(getCookie("type"));
+					alert("Invalid Request");
+					window.location.href = 'Login.xhtml';
+				}
+			else {
+				delete_cookie(x);
+				delete_cookie(getCookie("type"));
+				alert("Invalid Request");
+				window.location.href = 'Login.xhtml';
+			}
+		}
+		
+		function logOut(){
+			var x = getCookie("user");
+			delete_cookie(x);
+			delete_cookie(getCookie("type"));
+			window.location.href = 'Login.xhtml';
+		}
+		
+		function start() {
+		    PF('statusDialog').show();
+		}
+		 
+		function stop() {
+		    PF('statusDialog').hide();
+		}
+		
+	</script>
+</h:head>
+
+
+<h:body >
+	<div class="container">
+		<!-- Navigation -->
+		<header> <a href="">
+			<h4 class="logo">
+				<a href="http://www.gmu.edu"><img width="150"
+					src="https://www2.gmu.edu/sites/all/modules/features/feature_core_theme/templates/resources/images/mason-logo.png" /></a>
+			</h4>
+		</a> <nav>
+		<ul>
+			<li><a href="Login.xhtml">HOME</a></li>
+			<li><a href="#about">ABOUT</a></li>
+			<li><a href="#contact">CONTACT</a></li>
+		
+			
+		</ul>
+		</nav> </header>
+		<div id="hashes">
+		</div>
+		<!-- Hero Section -->
+		<section class="hero" id="hero">
+		<h2 class="hero_header">
+			Blockstack <span class="light">Assignments</span>
+		</h2>
+		<p class="tagline">Secure Assignment Sharing !</p>
+
+		<p class="filetag">
+				<p:outputLabel>Current BlockChain Info</p:outputLabel>
+		</p>
+			<div style="width:1200px; float:center; margin:auto;" >
+			<p:dataTable var="s" value="#{blockChainView}" scrollable="true" scrollWidth="1200">
+			<p:column><f:facet name="header">Current Chain Height</f:facet>
+			#{s.height}
+			</p:column>
+			<p:column style="width:500px;" ><f:facet name="header">Current Block</f:facet>
+			#{s.current}
+			</p:column>
+			<p:column><f:facet name="header">Previous Block</f:facet>
+			#{s.previous}
+			</p:column>
+			</p:dataTable>
+			</div>
+		</section>
+		<!-- About Section -->
+		<section class="about" id="about">
+		<h2 class="hidden">About</h2>
+		<p class="text_column">
+			Kindly choose your file to upload, you should upload your own unique
+			homework file. The policy is supported by <a
+				href="http://oai.gmu.edu/wp-content/uploads/2015/07/Honor-Code-Final-2015-16.pdf">
+				GMU Honor Code</a>. Grading policy is posted on the course website.
+		</p>
+		<p class="text_column">File uploads are secure, you can have a
+			look at your hashes posted in the block chain. You can also have a
+			proof of homework submission, without sharing the actual homework
+			until they are graded. This is a secure storage</p>
+		<p class="text_column">
+			For security purposes you need to use your private key to upload the
+			file. The private key is given to each student at the time to
+			registration. Please follow-up with the developers in case you lost
+			your private key : <a href="mailto:ajain13@gmu.edu">ajain13@gmu.edu</a>.
+			The key ensures the security of your assignment. The block stack
+			storage is valuable for its secure encryption policy.
+		</p>
+		</section>
+		<!-- Stats Gallery Section -->
+		<div class="gallery">
+			<div class="thumbnail">
+				<h1 class="stats">1500+</h1>
+				<h4>HASHES</h4>
+				<p>Published of file transactions to Block Chain</p>
+			</div>
+
+		</div>
+		<!-- Parallax Section -->
+		<section class="banner">
+		<h2 class="parallax">THE BLOCKSTACK PROJECT</h2>
+		<p class="parallax_description">The blockstack project allows you
+			to upload store and share the important critical assignment files
+			securely using secure cloud storage, web services and Blockchain</p>
+		<p class="parallax"></p>
+		</section>
+		<!-- More Info Section -->
+		<footer> <article class="footer_column">
+		<h3>ABOUT</h3>
+		<p>The block stack project developed as the part of final project
+			for CS -795</p>
+		<p>Block stack provides secure storage and sharing of files since
+			it uses the encryption and sharing using block chain</p>
+		<p>
+			<a href="http://www.baldimtsi.com/teaching/cs795_sp17">Course
+				Website</a>
+		</p>
+		<p>
+		Developed in collaboration by<br/>
+		Animesh Jain &amp; Ishan Khaparde
+		</p>
+		
+		<p>	
+			<a href="https://blockstack.org/papers">Read Paper Publications</a>
+		</p>
+		</article> <article class="footer_column">
+		<h3>GUIDANCE</h3>
+		<p>Guided by Prof Foteini Baldimtsi</p>
+		<p>
+			<a href="http://www.baldimtsi.com/">Website</a>
+		</p>
+		</article> </footer>
+		<!-- Footer Section -->
+		<section class="footer_banner" id="contact">
+		<h2 class="hidden">Footer Banner Section</h2>
+		<p class="hero_header">FOR THE LATEST NEWS &amp; UPDATES</p>
+		<div class="button"
+			onclick="window.location.href = 'http://blockchain.info'">BLockChain
+			Info</div>
+		</section>
+		<!-- Copyrights Section -->
+		<div class="copyright">
+			&copy;CS 795 - <strong> THE Block Stack Project @GMU</strong>
+		</div>
+	</div>
+	<!-- Main Container Ends -->
+
+
+</h:body>
+
+</html>

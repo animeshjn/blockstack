@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+	<title>Login: BlockStack GMU</title>
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/form-login.css" />
+	<script>
+		function userChange() {
+			var x = document.getElementById('instructor');
+			var y = document.getElementById('gnumber');
+			if (x.style.display === 'none') {
+				x.style.display = 'block';
+				y.style.display = 'none';
+			} else {
+				x.style.display = 'none';
+				y.style.display = 'block';
+			}
+		}
+	</script>
+</h:head>
+<body>
+
+	<div class="main-content">
+
+		<h:form class="form-login" action="#{loginController.login}">
+			<div class="form-log-in-with-email">
+				<div class="form-white-background">
+					<div id="gmulogo" class="">
+						<img src="https://www2.gmu.edu/sites/all/modules/features/feature_core_theme/templates/resources/images/mason-logo.png"></img>
+					</div>
+					<div class="form-title-row">
+						<h1>
+							The BlockStack Project <br /> <br /> Log in
+						</h1>
+					</div>
+
+					<div class="form-row">
+						<label> <span>Type of User</span> <h:selectOneMenu
+								value="#{loginController.type}" id="type" required="true"
+								requiredMessage="Please select the type of user"
+								autoWidth="true" onchange="userChange()">
+								<f:selectItem itemLabel="Student" itemValue="student"></f:selectItem>
+								<f:selectItem itemLabel="Instructor" itemValue="instructor"></f:selectItem>
+							</h:selectOneMenu>
+						</label>
+					</div>
+					<div id="gnumber" class="form-row">
+						<label> <span>GNumber:</span> <p:inputMask
+								mask="G99999999" value="#{loginController.student.studentId}"
+								converterMessage="Please enter digits only." />
+						</label>
+					</div>
+					<div id="instructor" class="form-row" style="display: none;">
+						<label> <span>Instructor ID:</span> <p:inputMask
+								mask="99999999" value="#{loginController.instructor.id}"
+								converterMessage="Please enter instr id only." alt="Numeric" />
+						</label>
+					</div>
+					<div class="form-row">
+						<label> <span>Password</span> <h:inputSecret id="password" value="#{loginController.password}" />
+						</label>
+					</div>
+					<div class="form-row">
+						<p:commandButton action="#{loginController.login}" value="Login"/>
+					</div>
+				</div>
+				<a href="#" class="form-forgotten-password">Forgotten password
+					&middot;</a> <a href="#" class="form-create-an-account">Create an
+					account &rarr;</a>
+			</div>
+
+		</h:form>
+
+	</div>
+	<br />
+	<br />
+	<br />
+	<h4 style="position: fixed; bottom: 0; left: 0;">Design: &copy; 2017 Animesh Jain</h4>
+</body>
+</html>
